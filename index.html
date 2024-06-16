@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lihat Produk Shopee Saya</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('yamadaryo.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .container img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 0 auto 20px auto; /* Set top and bottom margins to 0, and left-right margins to auto */
+      display: block;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin: 10px 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    button {
+      background-color: #1abc9c;
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+      transition: background-color 0.3s, transform 0.3s;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    button:hover {
+      background-color: #16a085;
+      transform: scale(1.05);
+    }
+
+    /* Style for pop-up cookies */
+    .cookie-popup {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none; /* Originally hidden */
+      max-width: 90%;
+      width: 400px;
+      text-align: center;
+    }
+
+    .cookie-popup p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+
+    .cookie-popup button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9em;
+      cursor: pointer;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 1em;
+        width: 90%;
+      }
+
+      .cookie-popup {
+        width: 90%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Produk Shopee Saya</h1>
+    <p>Tekan Butang Dibawah</p>
+    <img src="yamada.gif" alt="GIF" style="max-width: 50%; height: auto;">
+	<h1>👇🏻👇🏻👇🏻</h1>
+    <button onclick="openLink('https://s.shopee.com.my/10hm09azHK')">Tekan Sini Untuk Melihat Produk Shopee Saya</button>
+  </div>
+
+  <!-- Pop-up Cookies -->
+  <div id="cookiePopup" class="cookie-popup">
+    <p>Kami menggunakan kuki untuk memastikan pengalaman terbaik anda di laman web ini. Dengan meneruskan, anda bersetuju dengan penggunaan kuki.</p>
+    <button onclick="closeCookiePopup()">Terima</button>
+  </div>
+
+  <script>
+    // Function to get device type
+    function getDeviceType() {
+      const userAgent = navigator.userAgent;
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
+        return "mobile";
+      } else {
+        return "desktop";
+      }
+    }
+
+    // Function to set cookies
+    function setCookie(name, value, days) {
+      var expires = "";
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    // Function to open links and manage cookies
+    function openLink(url) {
+      setCookie("deviceType", getDeviceType(), 30); // Save the "deviceType" cookie for 30 days
+      checkCookieConsent(); // Check cookies consent before opening the link
+      window.location.href = url;
+    }
+
+    // Function to display pop-up cookies if there is no consent yet
+    function checkCookieConsent() {
+      if (!getCookie("cookieConsent")) {
+        document.getElementById("cookiePopup").style.display = "block";
+      }
+    }
+
+    // Function to close pop-up cookies and set cookieConsent to true
+    function closeCookiePopup() {
+      setCookie("cookieConsent", true, 30); // Agree to the use of cookies for 30 days
+      document.getElementById("cookiePopup").style.display = "none";
+    }
+
+    // Function to get cookie value
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        while (cookie.charAt(0) == ' ') cookie = cookie.substring(1, cookie.length);
+        if (cookie.indexOf(nameEQ) == 0) return cookie.substring(nameEQ.length, cookie.length);
+      }
+      return null;
+    }
+
+    // Checking cookies consent when the page is loaded
+    window.onload = function() {
+      checkCookieConsent();
+    };
+  </script>
+</body>
+
+</html>
